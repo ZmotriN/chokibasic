@@ -1,0 +1,37 @@
+{
+  "name": "chokibasic",
+  "version": "1.0.0",
+  "description": "Basic chokidar watcher + esbuild + sass + csso helpers",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ZmotriN/chokibasic.git"
+  },
+  "keywords": [
+    "chokidar",
+    "watch",
+    "sass",
+    "esbuild",
+    "csso"
+  ],
+  "author": "",
+  "license": "MIT",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/ZmotriN/chokibasic/issues"
+  },
+  "homepage": "https://github.com/ZmotriN/chokibasic#readme",
+  "files": [
+    "index.js",
+    "src/"
+  ],
+  "dependencies": {
+    "chokidar": "^5.0.0",
+    "csso": "^5.0.5",
+    "esbuild": "^0.27.3",
+    "sass": "^1.97.3"
+  }
+}
