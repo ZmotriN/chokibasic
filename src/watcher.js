@@ -209,7 +209,7 @@ const buildCSS = async (inputScss, outCssMin) => {
 	let compiled;
 	try {
 		compiled = sass.compile(inputScss, {
-			loadPaths: [path.resolve(__dirname, "../node_modules")],
+			loadPaths: [path.resolve(process.cwd(), "./node_modules")],
 			style: "compressed",
 			sourceMap: false,
 			sourceMapIncludeSources: false,

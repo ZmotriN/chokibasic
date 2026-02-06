@@ -1,8 +1,10 @@
 {
   "name": "chokibasic",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Basic chokidar watcher + esbuild + sass + csso helpers",
   "main": "index.js",
+  "types": "index.d.ts",
+  "files": ["index.js", "index.d.ts", "src/"],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -24,10 +26,6 @@
     "url": "https://github.com/ZmotriN/chokibasic/issues"
   },
   "homepage": "https://github.com/ZmotriN/chokibasic#readme",
-  "files": [
-    "index.js",
-    "src/"
-  ],
   "dependencies": {
     "chokidar": "^5.0.0",
     "csso": "^5.0.5",
