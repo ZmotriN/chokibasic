@@ -205,7 +205,7 @@ function createWatchers(rules, options = {}) {
 }
 
 
-const buildCSS = async (inputScss, outCssMin) => {
+const buildCSS = async (inputScss, outCssMin, options = {}) => {
 	let compiled;
 	try {
 		compiled = sass.compile(inputScss, {
@@ -213,18 +213,19 @@ const buildCSS = async (inputScss, outCssMin) => {
 			style: "compressed",
 			sourceMap: false,
 			sourceMapIncludeSources: false,
+			...options
 		});
+		const minified = csso.minify(compiled.css, { restructure: false });
+		fs.writeFileSync(outCssMin, minified.css);
+		console.log(`✅ CSS generated: ${outCssMin}`);
 	} catch (err) {
 		console.error("❌ Sass compile error:");
 		console.error(err?.formatted || err?.message || err);
 	}
-	const minified = csso.minify(compiled.css, { restructure: false });
-	fs.writeFileSync(outCssMin, minified.css);
-	console.log(`✅ CSS generated: ${outCssMin}`);
 }
 
 
-const buildJS = async (entry, outfile) => {
+const buildJS = async (entry, outfile, options = {}) => {
 	try {
 		await esbuild.build({
 			entryPoints: [entry],
@@ -237,6 +238,7 @@ const buildJS = async (entry, outfile) => {
 			supported: { "template-literal": false },
 			target: ["es2020"],
 			legalComments: "none",
+			...options
 		});
 		console.log(`✅ JS generated: ${outfile}`);
 	} catch (err) {

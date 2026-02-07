@@ -1,6 +1,6 @@
 {
   "name": "chokibasic",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Basic chokidar watcher + esbuild + sass + csso helpers",
   "main": "index.js",
   "types": "index.d.ts",
