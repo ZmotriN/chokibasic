@@ -4,6 +4,7 @@ const path = require("path");
 const esbuild = require("esbuild");
 const sass = require("sass");
 const csso = require("csso");
+const pxpros = require("pxpros");
 
 
 function toPosix(p) {
@@ -257,4 +258,15 @@ const buildJS = async (entry, outfile, options = {}) => {
 }
 
 
-module.exports = { createWatchers, buildCSS, buildJS };
+const buildPHP = async (file) => {
+	const results = await pxpros.render(file);
+	if(results.success) {
+		results.files.forEach(file => console.log(`✅ HTML generated: ${file}`));
+	} else {
+		console.error("❌ pxpros render failed.");
+		console.error(results.error);
+	}
+}
+
+
+module.exports = { createWatchers, buildCSS, buildJS, buildPHP };
