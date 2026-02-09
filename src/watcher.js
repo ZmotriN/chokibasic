@@ -130,6 +130,7 @@ function createWatchers(rules, options = {}) {
 			console.log("  patterns:", patterns);
 			console.log("  baseDirs:", baseDirs);
 			console.log("  ignored (applied in queue):", [...(opt.globalIgnored || []), ...(rule.ignored || [])]);
+			console.log("");
 		}
 
 		const pending = new Map();
@@ -182,13 +183,13 @@ function createWatchers(rules, options = {}) {
 			binaryInterval: opt.binaryInterval,
 		});
 
-		watcher.on("ready", () => {
-			console.log(`[${name}] ready`);
-		});
+		// watcher.on("ready", () => {
+		// 	console.log(`[${name}] ready`);
+		// });
 
-		watcher.on("add", (p) => queue("add", p));
+		// watcher.on("add", (p) => queue("add", p));
 		watcher.on("change", (p) => queue("change", p));
-		watcher.on("unlink", (p) => queue("unlink", p));
+		// watcher.on("unlink", (p) => queue("unlink", p));
 		watcher.on("error", (err) => console.error(`[${name}] watch error:`, err));
 
 		handles.push({
