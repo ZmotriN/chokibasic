@@ -366,8 +366,8 @@ async function walkAndCopy(dir, src, dest, ig, stats, banner = null) {
 			const copied = await copyFilePreserveTree(abs, src, dest, ig);
 			if (copied) {
 				const lower = abs.toLowerCase();
-				if (lower.endsWith('.js')) await fsprom.writeFile(copied, "/*!\n\n" + bannerContent + "\n\n*/" + (await fsprom.readFile(copied, 'utf8')), "utf8");
-				else if (lower.endsWith('.css')) await fsprom.writeFile(copied, "/*!\n\n" + bannerContent + "\n\n*/" + (await fsprom.readFile(copied, 'utf8')), "utf8");
+				if (lower.endsWith('.js')) await fsprom.writeFile(copied, "/*!\n\n" + bannerContent + "\n\n*/\n" + (await fsprom.readFile(copied, 'utf8')), "utf8");
+				else if (lower.endsWith('.css')) await fsprom.writeFile(copied, "/*!\n\n" + bannerContent + "\n\n*/\n" + (await fsprom.readFile(copied, 'utf8')), "utf8");
 				else if (lower.endsWith('.html')) await fsprom.writeFile(copied, "<!--\n\n" + bannerContent + "\n\n\-->\n" + (await fsprom.readFile(copied, 'utf8')).replaceAll(/###YEAR###/g, (new Date).getFullYear()), "utf8");
 				stats.copied++;
 			}

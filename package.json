@@ -1,6 +1,6 @@
 {
   "name": "chokibasic",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Basic chokidar watcher + pxpros + esbuild + sass + csso helpers",
   "main": "index.js",
   "types": "index.d.ts",
@@ -23,7 +23,7 @@
     "esbuild",
     "csso"
   ],
-  "author": "",
+  "author": "Maxime Larrivée-Roy",
   "license": "MIT",
   "type": "commonjs",
   "bugs": {
@@ -35,7 +35,7 @@
     "csso": "^5.0.5",
     "esbuild": "^0.27.3",
     "ignore": "^7.0.5",
-    "pxpros": "^1.0.1",
+    "pxpros": "^1.0.2",
     "sass": "^1.97.3"
   }
 }
