@@ -361,6 +361,7 @@ async function copyFilePreserveTree(absSrc, src, dist, ig) {
 async function walkAndCopy(dir, src, dest, ig, stats, banner = null) {
 	const entries = await fsprom.readdir(dir, { withFileTypes: true });
 	const bannerContent = (await fsprom.readFile(banner || path.join(__dirname, 'banner.txt'), 'utf8')).replace(/###DATE###/, formatFrDate());
+	const today = (d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`)(new Date());
 
 	for (const de of entries) {
 		const abs = path.join(dir, de.name);
@@ -381,6 +382,7 @@ async function walkAndCopy(dir, src, dest, ig, stats, banner = null) {
 				else if (lower.endsWith('.html')) await fsprom.writeFile(copied, "<!--\n\n" + bannerContent + "\n\n\-->\n" + (await fsprom.readFile(copied, 'utf8'))
 					.replaceAll(/###YEAR###/g, (new Date).getFullYear())
 					.replaceAll(/###TIMESTAMP###/g, Math.floor(Date.now() / 1000)), "utf8");
+				else if (lower.endsWith('sitemap.xml')) await fsprom.writeFile(copied, (await fsprom.readFile(copied, 'utf8')).replaceAll(/###TODAY###/g, today), "utf8");
 				stats.copied++;
 			}
 			else stats.skipped++;

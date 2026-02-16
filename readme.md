@@ -47,6 +47,9 @@ process.on("SIGINT", async () => {
 
 ## Changelog
 
+### Version 1.1.2
+- exportDist: Add date remplacement for sitemap.xml
+
 ### Version 1.1.1
 - Update dependancy: pxpros 1.0.4
 
