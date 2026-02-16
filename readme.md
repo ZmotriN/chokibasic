@@ -44,3 +44,7 @@ process.on("SIGINT", async () => {
 });
 
 ```
+
+## Changelog
+### Version 1.1.0
+- Add a sitemap builder with pxpros

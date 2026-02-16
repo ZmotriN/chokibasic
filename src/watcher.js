@@ -273,6 +273,16 @@ const buildPHP = async (file) => {
 }
 
 
+const buildSitemap = async (file) => {
+	const results = await pxpros.sitemap(file);
+	if(results.success) {
+		results.files.forEach(file => console.log(`✅ XML Sitemap generated: ${file}`));
+	} else {
+		console.error("❌ pxpros sitemap creation failed.");
+		console.error(results.error);
+	}
+}
+
 
 async function emptyDir(dir) {
 	await fsprom.mkdir(dir, { recursive: true });
@@ -368,7 +378,9 @@ async function walkAndCopy(dir, src, dest, ig, stats, banner = null) {
 				const lower = abs.toLowerCase();
 				if (lower.endsWith('.js')) await fsprom.writeFile(copied, "/*!\n\n" + bannerContent + "\n\n*/\n" + (await fsprom.readFile(copied, 'utf8')), "utf8");
 				else if (lower.endsWith('.css')) await fsprom.writeFile(copied, "/*!\n\n" + bannerContent + "\n\n*/\n" + (await fsprom.readFile(copied, 'utf8')), "utf8");
-				else if (lower.endsWith('.html')) await fsprom.writeFile(copied, "<!--\n\n" + bannerContent + "\n\n\-->\n" + (await fsprom.readFile(copied, 'utf8')).replaceAll(/###YEAR###/g, (new Date).getFullYear()), "utf8");
+				else if (lower.endsWith('.html')) await fsprom.writeFile(copied, "<!--\n\n" + bannerContent + "\n\n\-->\n" + (await fsprom.readFile(copied, 'utf8'))
+					.replaceAll(/###YEAR###/g, (new Date).getFullYear())
+					.replaceAll(/###TIMESTAMP###/g, Math.floor(Date.now() / 1000)), "utf8");
 				stats.copied++;
 			}
 			else stats.skipped++;
@@ -395,4 +407,4 @@ const exportDist = async (src, dist, banner = null) => {
 }
 
 
-module.exports = { createWatchers, exportDist, buildCSS, buildJS, buildPHP };
+module.exports = { createWatchers, exportDist, buildCSS, buildJS, buildPHP, buildSitemap };
