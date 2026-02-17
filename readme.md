@@ -235,6 +235,9 @@ await exportDist("src", "dist", "src/banner.txt");
 
 ## Changelog
 
+### Version 1.1.4
+* Update dependancy: pxpros 1.0.5
+
 ### Version 1.1.3
 * Complete refactor
 * Fix buildCSS "style: expanded"
@@ -245,7 +248,7 @@ await exportDist("src", "dist", "src/banner.txt");
 
 ### Version 1.1.1
 
-* Update dependency: pxpros 1.0.4
+* Update dependancy: pxpros 1.0.4
 
 ### Version 1.1.0
 
