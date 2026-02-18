@@ -235,6 +235,9 @@ await exportDist("src", "dist", "src/banner.txt");
 
 ## Changelog
 
+### Version 1.1.8
+* Update dependancy: pxpros 1.1.3
+
 ### Version 1.1.7
 * Update dependancy: pxpros 1.1.2
 
