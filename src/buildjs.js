@@ -14,6 +14,7 @@ const buildJS = async (entry, outfile, options = {}) => {
 			supported: { "template-literal": false },
 			target: ["es2020"],
 			legalComments: "none",
+			loader: { '.json': 'json' },
 			...options
 		});
 		console.log(`✅ JS generated: ${outfile}`);
