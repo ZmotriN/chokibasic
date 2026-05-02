@@ -87,6 +87,13 @@ declare namespace chokibasic {
     skipped: number;
   }
 
+  export interface ExportDistOptions {
+    ignore?: string[];
+    include?: string[];
+    debug?: boolean;
+    filter?: (relPath: string) => boolean;
+  }
+
   /** Options forwardées à esbuild.build() */
   export type BuildJSOptions = Parameters<typeof import("esbuild").build>[0];
 
@@ -107,8 +114,11 @@ declare namespace chokibasic {
   export function exportDist(
     src: string,
     dist: string,
-    banner?: string | null
+    banner?: string | null,
+    options?: ExportDistOptions
   ): Promise<ExportDistStats>;
+
+
 
   /**
    * Compile SCSS -> CSS minifié (csso), écrit dans outCssMin.
