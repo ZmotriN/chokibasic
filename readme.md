@@ -9,7 +9,7 @@ Tiny build & watch helpers for simple static projects.
 - `buildJS(entry, outfile, options?)`
 - `buildPHP(file)`
 - `buildSitemap(file)`
-- `exportDist(src, dist, bannerPath?)`
+- `exportDist(src, dist, bannerPath?, options?)`
 
 ---
 
