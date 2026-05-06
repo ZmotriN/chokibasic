@@ -5,56 +5,69 @@ const pm = require("picomatch");
 
 const ROOT = process.cwd();
 
-/**
- * Parcourt récursivement la configuration et transforme les valeurs
- * si elles correspondent à un fichier existant et à un pattern défini.
- */
-async function walkAndTransform(node, matchers) {
+
+async function getMetadata() {
+    let version = "0.0.0";
+    try {
+        const pkg = JSON.parse(await fs.readFile(path.join(ROOT, "package.json"), "utf8"));
+        version = pkg.version || version;
+    } catch (e) {}
+
+    const now = new Date();
+    const pad = (n) => n.toString().padStart(2, '0');
+    const dateStr = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())} ${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
+
+    return { version, date: dateStr };
+}
+
+
+async function walkAndTransform(node, matchers, metadata) {
     if (Array.isArray(node)) {
-        return await Promise.all(node.map(item => walkAndTransform(item, matchers)));
+        return await Promise.all(node.map(item => walkAndTransform(item, matchers, metadata)));
     }
 
     if (typeof node === 'object' && node !== null) {
         const newNode = {};
         for (const [key, value] of Object.entries(node)) {
-            newNode[key] = await walkAndTransform(value, matchers);
+            newNode[key] = await walkAndTransform(value, matchers, metadata);
         }
         return newNode;
     }
 
     if (typeof node === 'string') {
-        const fullPath = path.join(ROOT, node);
+        let processedString = node
+            .replace(/__VERSION__/g, metadata.version)
+            .replace(/__DATE__/g, metadata.date);
+
+        const fullPath = path.join(ROOT, processedString);
         try {
             const stats = await fs.stat(fullPath);
             if (stats.isFile()) {
                 for (const [pattern, callback] of Object.entries(matchers)) {
-                    const isMatch = pm(pattern);
-                    if (isMatch(node)) {
+                    if (pm(pattern)(processedString)) {
                         const content = await fs.readFile(fullPath);
-                        return await callback(content, node);
+                        return await callback(content, processedString);
                     }
                 }
             }
-        } catch (err) {
-        }
+        } catch (err) {}
+        return processedString;
     }
 
     return node;
 }
 
-/**
- * Fonction principale buildConf
- */
+
 async function buildConf(src, dst, matchers = {}) {
     try {
+        const metadata = await getMetadata();
         const fileContents = await fs.readFile(src, 'utf8');
         const rawData = yaml.load(fileContents);
-        const processedData = await walkAndTransform(rawData, matchers);
-        const jsonContent = JSON.stringify(processedData, null, 2);
-        await fs.writeFile(dst, jsonContent, 'utf8');
-        console.log(`✅ Build de la configuration réussi : ${dst}`);
+        const processedData = await walkAndTransform(rawData, matchers, metadata);
+        await fs.writeFile(dst, JSON.stringify(processedData, null, 2), 'utf8');
+        console.log(`✅ Build réussi : ${dst} (${metadata.version})`);
     } catch (error) {
-        console.error("❌ Erreur lors du buildConf :", error);
+        console.error("❌ Erreur :", error);
     }
 }
 
