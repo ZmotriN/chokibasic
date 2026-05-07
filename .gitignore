@@ -1,4 +1,5 @@
 /node_modules/
+/archives/
 /package-lock.json
 Thumbs.db
 *.tgz

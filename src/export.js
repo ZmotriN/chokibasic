@@ -41,22 +41,18 @@ async function loadGitignore(src, extraPatterns = []) {
 	if (fs.existsSync(giPath)) {
 		const txt = await fsprom.readFile(giPath, 'utf8');
 
-		// ⚠️ IMPORTANT: on convert les patterns ROOT → relatifs à src
 		const lines = txt.split('\n')
 			.map(l => l.trim())
 			.filter(l => l && !l.startsWith('#'))
 			.map(l => {
-				// enlever "/" initial si présent
 				return l.replace(/^\//, '');
 			});
 
 		ig.add(lines);
 	}
 
-	// Toujours ignorer dist (relatif ROOT → on garde tel quel)
 	ig.add('dist/');
 
-	// 👇 Patterns custom (déjà relatifs à src)
 	if (Array.isArray(extraPatterns)) {
 		ig.add(extraPatterns);
 	}
@@ -78,10 +74,8 @@ async function copyFilePreserveTree(absSrc, src, dist, ig) {
 	const relFromSrc = path.relative(src, absSrc);
 	const relPosix = norm(relFromSrc);
 
-	// 1) ignore basé sur src
 	if (ig.ignores(relPosix)) return false;
 
-	// 2) exclusions internes
 	if (shouldExcludeFile(relPosix, absSrc)) return false;
 
 	const absDst = path.join(dist, relFromSrc);
@@ -168,19 +162,11 @@ async function walkAndCopy(dir, src, dest, ig, stats, banner = null) {
 const exportDist = async (src, dist, banner = null, options = {}) => {
 	try {
 		const ig = await loadGitignore(src, options.ignore || []);
-
 		await emptyDir(dist);
-
-		if (!fs.existsSync(src)) {
-			throw new Error('Folder src is invalid.');
-		}
-
+		if (!fs.existsSync(src)) throw new Error('Folder src is invalid.');
 		const stats = { copied: 0, skipped: 0 };
-
 		await walkAndCopy(src, src, dist, ig, stats, banner);
-
 		return stats;
-
 	} catch (err) {
 		throw new Error(err);
 	}

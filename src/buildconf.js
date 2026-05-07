@@ -1,4 +1,4 @@
-const fs = require("fs").promises;
+const fs = require('fs/promises');
 const path = require("path");
 const yaml = require("js-yaml");
 const pm = require("picomatch");
@@ -65,9 +65,9 @@ async function buildConf(src, dst, matchers = {}) {
         const rawData = yaml.load(fileContents);
         const processedData = await walkAndTransform(rawData, matchers, metadata);
         await fs.writeFile(dst, JSON.stringify(processedData, null, 2), 'utf8');
-        console.log(`✅ Build réussi : ${dst} (${metadata.version})`);
+        console.log(`✅ JSON generated: ${dst}`);
     } catch (error) {
-        console.error("❌ Erreur :", error);
+        console.error("❌ Error:", error);
     }
 }
 
