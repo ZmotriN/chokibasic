@@ -1,4 +1,5 @@
-const esbuild = require("esbuild");
+// const esbuild = require("esbuild");
+import esbuild from "esbuild";
 
 
 const buildJS = async (entry, outfile, options = {}) => {
@@ -33,4 +34,4 @@ const buildJS = async (entry, outfile, options = {}) => {
 	}
 }
 
-module.exports = { buildJS };
+export { buildJS };

@@ -1,8 +1,8 @@
-const pxpros = require("pxpros");
+import { sitemap, render } from "pxpros";
 
 
 const buildPHP = async (file) => {
-	const results = await pxpros.render(file);
+	const results = await render(file);
 	if(results.success) {
 		results.files.forEach(file => console.log(`✅ HTML generated: ${file}`));
 	} else {
@@ -13,7 +13,7 @@ const buildPHP = async (file) => {
 
 
 const buildSitemap = async (file) => {
-	const results = await pxpros.sitemap(file);
+	const results = await sitemap(file);
 	if(results.success) {
 		results.files.forEach(file => console.log(`✅ XML Sitemap generated: ${file}`));
 	} else {
@@ -22,4 +22,4 @@ const buildSitemap = async (file) => {
 	}
 }
 
-module.exports = { buildPHP, buildSitemap };
+export { buildPHP, buildSitemap };

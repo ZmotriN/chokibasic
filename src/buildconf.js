@@ -1,7 +1,7 @@
-const fs = require('fs/promises');
-const path = require("path");
-const yaml = require("js-yaml");
-const pm = require("picomatch");
+import fs from 'fs/promises';
+import path from "path";
+import yaml from "js-yaml";
+import pm from "picomatch";
 
 const ROOT = process.cwd();
 
@@ -71,4 +71,4 @@ async function buildConf(src, dst, matchers = {}) {
     }
 }
 
-module.exports = { buildConf };
+export { buildConf };

@@ -1,6 +1,6 @@
 {
   "name": "chokibasic",
-  "version": "1.2.3",
+  "version": "2.0.0",
   "description": "Basic chokidar watcher + pxpros + esbuild + sass + csso helpers",
   "main": "index.js",
   "types": "index.d.ts",
@@ -25,7 +25,7 @@
   ],
   "author": "Maxime Larrivée-Roy",
   "license": "MIT",
-  "type": "commonjs",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/ZmotriN/chokibasic/issues"
   },
@@ -35,9 +35,13 @@
     "csso": "^5.0.5",
     "esbuild": "^0.28.0",
     "ignore": "^7.0.5",
-    "js-yaml": "^4.1.1",
+    "js-yaml": "^4.2.0",
     "picomatch": "^4.0.4",
-    "pxpros": "^1.1.3",
+    "pxpros": "^2.0.0",
     "sass": "^1.100.0"
+  },
+  "allowScripts": {
+    "@parcel/watcher@2.5.6": true,
+    "esbuild@0.28.0": true
   }
 }

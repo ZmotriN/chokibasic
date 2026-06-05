@@ -1,9 +1,14 @@
-const fsprom = require('fs/promises');
-const ignore = require('ignore');
-const fs = require("node:fs");
-const path = require("path");
+import fsprom from 'fs/promises';
+import ignore from 'ignore';
+import fs from "node:fs";
+import path from "path";
+import { fileURLToPath } from 'url';
 
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = process.cwd();
+
+
 
 async function emptyDir(dir) {
 	await fsprom.mkdir(dir, { recursive: true });
@@ -172,4 +177,4 @@ const exportDist = async (src, dist, banner = null, options = {}) => {
 	}
 };
 
-module.exports = { exportDist };
+export { exportDist };

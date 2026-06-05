@@ -1,8 +1,6 @@
-module.exports = {
-	...require("./src/buildjs.js"),
-	...require("./src/buildcss.js"),
-	...require("./src/buildphp.js"),
-	...require("./src/buildconf.js"),
-	...require("./src/export.js"),
-	...require("./src/watchers.js"),
-};
+export { buildJS } from "./src/buildjs.js";
+export { buildCSS } from "./src/buildcss.js";
+export { buildPHP, buildSitemap } from "./src/buildphp.js";
+export { buildConf } from "./src/buildconf.js";
+export { exportDist } from "./src/export.js";
+export { createWatchers } from "./src/watchers.js";

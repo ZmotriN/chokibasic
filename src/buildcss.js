@@ -1,7 +1,7 @@
-const sass = require("sass");
-const csso = require("csso");
-const path = require("path");
-const fs = require("node:fs");
+import * as sass from 'sass'
+import { minify } from 'csso';
+import path from "path";
+import fs from "node:fs";
 
 const buildCSS = async (inputScss, outCssMin, options = {}) => {
 	// let compiled;
@@ -16,7 +16,7 @@ const buildCSS = async (inputScss, outCssMin, options = {}) => {
 		if(options?.style == "expanded"){
 			fs.writeFileSync(outCssMin, compiled.css);
 		} else {
-			const minified = csso.minify(compiled.css, { restructure: false });
+			const minified = minify(compiled.css, { restructure: false });
 			fs.writeFileSync(outCssMin, minified.css);
 		}
 		console.log(`✅ CSS generated: ${outCssMin}`);
@@ -26,4 +26,4 @@ const buildCSS = async (inputScss, outCssMin, options = {}) => {
 	}
 }
 
-module.exports = { buildCSS };
+export { buildCSS };

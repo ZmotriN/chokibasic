@@ -1,5 +1,5 @@
-const path = require("path");
-const chokidar = require("chokidar");
+import path from "path";
+import chokidar from "chokidar";
 
 function toPosix(p) {
 	return p.replace(/\\/g, "/");
@@ -200,4 +200,4 @@ function createWatchers(rules, options = {}) {
 	};
 }
 
-module.exports = { createWatchers };
+export { createWatchers };
