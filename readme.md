@@ -235,6 +235,9 @@ await exportDist("src", "dist", "src/banner.txt");
 
 ## Changelog
 
+## Version 2.0.1
+* PXPros v2.0.1 with YAML for PHP
+
 ## Version 2.0.0
 * PXPros v2.0.0 with PHP-WASM included
 

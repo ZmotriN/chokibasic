@@ -1,6 +1,6 @@
 {
   "name": "chokibasic",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Basic chokidar watcher + pxpros + esbuild + sass + csso helpers",
   "main": "index.js",
   "types": "index.d.ts",
@@ -37,7 +37,7 @@
     "ignore": "^7.0.5",
     "js-yaml": "^4.2.0",
     "picomatch": "^4.0.4",
-    "pxpros": "^2.0.0",
+    "pxpros": "^2.0.1",
     "sass": "^1.100.0"
   },
   "allowScripts": {
